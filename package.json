@@ -1,0 +1,24 @@
+{
+  "name": "maygourmet",
+  "version": "1.0.0",
+  "description": "May Gourmet est une platforme de réservation",
+  "main": "serveur.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anzlatimohamed404-prog/mayGourmet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/anzlatimohamed404-prog/mayGourmet/issues"
+  },
+  "homepage": "https://github.com/anzlatimohamed404-prog/mayGourmet#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
