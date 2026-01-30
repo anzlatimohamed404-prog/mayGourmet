@@ -1,14 +1,13 @@
 const http = require('http');
+
+//J'importe l'app 
 const app = require('./app');
-
-const serveur = http.createServer(app);
-
 
 const numeroPort = 3003;
 
 app.set('port', numeroPort);
+const server = http.createServer(app);
 
-serveur.listen(numeroPort,() => {
-    console.log('serveur démarré sur le port ' + numeroPort );
+server.listen(numeroPort, ()=> {
+    console.log ("Le serveur de MayGourmet est à l'écoute sur le port", numeroPort);
 });
- 

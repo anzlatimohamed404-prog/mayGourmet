@@ -2,26 +2,52 @@ const express = require('express');
 
 const app = express();
 
-// API Route pour la page racine : localhost:3004
-app.get('/', (req, res) =>{
+// Je précise que les vues sont dans le dossier views
+app.set('views', './views');
 
-    // Message à afficher: Bienvenue chez MayGourmet
-    res.write("<h1> Bienvenue chez MayGourmet </h1>");
+
+//je précise qu'on utilise ejs pour les vues
+app.set('view engine', 'ejs');
+
+
+// Je précisevque j'utilise le dossier "public"qui contient les fichier statics
+app.set(express.static('public'));
+
+
+app.get('/', (req, res) => {
+    //Message à afficher : Bienvenue chez May Gourmet
+    res.write("<h1>Bienvenue chez May Gourmet</h1>");
+
+    //Fin de la réponse
     res.end();
 });
 
-// API Route pour la page d'accueil localhost/api/acceuil
 app.get('/api/accueil', (req, res) => {
-    console.log("je passe dans /api/accueil");
+    console.log("Je passe dans /api/accueil");
 
-    // Le type d'rncordage de texte retourné en réponse
-    res.setHeader('content-type','text/html; charset=utf-8');
+    res.render('accueil');
+    
 
-     // Le contenu qui sera affiché coté navigateur web
-    res.write("<p> je suis à l'accueil</p>");
+    //Le type d'encodage
+    //res.writeHead(200, { "content-type": "text/html;charset=utf-8"});
 
-    // Fin de la réponse
-    res.end();
+    //Le contenu qui sera affiché côté navigateur web
+    //res.write("<p> Je suis à l'accueil</p>");
+
+    //Fin de la réponse
+    //res.end();
 });
+
+app.get('/api/equipe', (req, res) => {
+    console.log("Je passe dans /api/equipe");
+
+    
+    res.render('equipe');
+
+
+
+
+});
+
 
 module.exports = app;

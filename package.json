@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/anzlatimohamed404-prog/mayGourmet#readme",
   "dependencies": {
+    "ejs": "^4.0.1",
     "express": "^5.2.1"
   }
 }
