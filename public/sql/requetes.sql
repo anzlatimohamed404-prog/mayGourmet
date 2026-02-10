@@ -27,15 +27,35 @@ VALUES
 SELECT * FROM equipe;
 
 
+-- je créer la table fournisseur.
 CREATE TABLE fournisseur (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_fournisseur INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(155) NOT NULL,
     responsable VARCHAR(155) NOT NULL,
     mail VARCHAR(100) NOT NULL,
     telephone VARCHAR(100),
     adresse_postale VARCHAR(255),
-    presentation_fournisseur VARCHAR(255)
+    presentation_fournisseur VARCHAR(255),
+    -- j'associe la table fournisseur a la table produit en utilisant L'ID_produit
+    --l'ID_PRODUIT provient de la table produit
+    FOREIGN KEY (id_produit) REFERENCES produit(id_produit)
     
+);
+
+-- créer  la table 'produit'
+CREATE TABLE produit(
+    id_produit INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    nom VARCHAR(100) NOT NULL,
+    presentation VARCHAR(155),
+    prix INT NOT NULL,
+    origin VARCHAR(30) NOT NULL,
+    catégorie VARCHAR(30)
+    disponibilé BOOLEAN DEFAULT false,
+    type_culture VARCHAR(30),
+    -- j'associe la table produit a la table fournisseur en utlisant les identifiants de chaque
+    FOREIGN KEY (id_fournisseur) REFERENCES fournisseur
+    (id_fournisseur)
+
 );
 
 SHOW TABLES;
