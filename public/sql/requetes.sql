@@ -49,7 +49,7 @@ CREATE TABLE produit(
     presentation VARCHAR(155),
     prix INT NOT NULL,
     origin VARCHAR(30) NOT NULL,
-    catégorie VARCHAR(30)
+    catégorie VARCHAR(30),
     disponibilé BOOLEAN DEFAULT false,
     type_culture VARCHAR(30),
     -- j'associe la table produit a la table fournisseur en utlisant les identifiants de chaque

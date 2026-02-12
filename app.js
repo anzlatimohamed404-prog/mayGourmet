@@ -1,53 +1,94 @@
 const express = require('express');
+// J'importe Mysql2 utilisé interroger la BDD mysql
+const Mysql2 = require("mysql2"); 
+
+// J'importe le pilote express-myconnection utilisé pour me connecter à la BDD
+const myconnection = require("express-myconnection");
 
 const app = express();
 
-// Je précise que les vues sont dans le dossier views
+const optionsConnexionBaseDeDonnees = {
+    host: "localhost",
+    user: "root",
+    password: "Irwane240319",
+    database:  "mygourmet",
+    port: 3306
+};
+
+// Middleware pour se connecter à la base de données MySQL
+app.use(myconnection(Mysql2, optionsConnexionBaseDeDonnees, "pool"));
+
+// Je précise que les vues sont dans le dossier 'views'
 app.set('views', './views');
 
-
-//je précise qu'on utilise ejs pour les vues
+// je préciceque nous utilison EJS pour las vues
 app.set('view engine', 'ejs');
 
+// Je pr"cise que j'utilise le dossier 'public'qui contient les fichiers statiques
+app.use(express.static('public'));
 
-// Je précisevque j'utilise le dossier "public"qui contient les fichier statics
-app.set(express.static('public'));
 
+// API ROUTE pour la racine du site : localhost:3003
 
 app.get('/', (req, res) => {
-    //Message à afficher : Bienvenue chez May Gourmet
-    res.write("<h1>Bienvenue chez May Gourmet</h1>");
-
-    //Fin de la réponse
+    // Message à afficher : Bienvenue chez MayGourmet
+    res.write("<h1>Bienvenue chez MayGourmet</h1>");
     res.end();
 });
 
-app.get('/api/accueil', (req, res) => {
-    console.log("Je passe dans /api/accueil");
 
-    res.render('accueil');
-    
+//API ROUTE pour la page d'accueil localhost:3003/api/acceuil
+app.get('/api/acceuil', (req, res) => {
+    console.log("je passe dans /api/acceuil");
+    res.render('acceuil');
 
-    //Le type d'encodage
-    //res.writeHead(200, { "content-type": "text/html;charset=utf-8"});
-
-    //Le contenu qui sera affiché côté navigateur web
-    //res.write("<p> Je suis à l'accueil</p>");
-
-    //Fin de la réponse
-    //res.end();
 });
 
 app.get('/api/equipe', (req, res) => {
-    console.log("Je passe dans /api/equipe");
+    console.log("Je passe dans la route API REST /api/equipe");
 
-    
-    res.render('equipe');
+    req.getConnection((erreur, connection) => {
 
+        if (erreur) {
+            console.log("Erreur de connexion : ", erreur);
+            return res.status(500).send("Erreur de connexion à la base de données");
+        }
 
+        connection.query("SELECT * FROM equipe", [], (erreur, resultatsEquipe) => {
 
+            if (erreur) {
+                console.log("Erreur dans la requête SQL : ", erreur);
+                return res.status(500).send("Erreur lors de la récupération des équipes");
+            }
 
+            console.log("Mon équipe : ", resultatsEquipe);
+
+            // ON RENVOIE LES DONNÉES À LA VUE ICI
+            res.render('equipe', {  resultatsEquipe });
+
+        });
+    });
 });
+
+
+
+    /* Le type d'encodage du texte retourné en réponse 
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+
+    // Le contenu qui sera affiché côté navigateur web
+    res.write("<p> Je suis à l'accueil</p>");
+
+    // Terminer la réponse
+    res.end();
+}); */
+
+
+
+
+
+
+
+
 
 
 module.exports = app;

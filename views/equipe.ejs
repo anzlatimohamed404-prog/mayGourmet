@@ -1,14 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipe</title>
+    <title>Notre équipe</title>
+
+    
+
 </head>
 <body>
-    <!-- Inclure le fichier navbar.ejs pour avoir la barre de navigation -->
-     <%- include('navbar') -%>
-    <h2>Voici mon équipe May Gourmet</h2>
-    
+
+    <h1 style="text-align:center;">Liste de l'équipe</h1>
+
+<style>
+table {
+    border-collapse: collapse;
+    width: 70%;
+    margin: 20px auto;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #dee1d2; /* couleur en-tête */
+}
+
+td {
+    background-color: #efe8e8; /* couleur intérieur tableau */
+}
+
+body {
+    background-color: rgb(216, 234, 243);
+}
+</style>
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Poste</th>
+            <th>prenom</th>
+            <th>presentation</th>
+            <th>telephone</th>
+             <th>date_recrutement </th>
+            <th>mail</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <% resultatsEquipe.forEach(function(membre){ %>
+            <tr>
+                <td><%= membre.id %></td>
+                <td><%= membre.nom %></td>
+                <td><%= membre.poste %></td>
+                <td><%= membre.prenom %></td>
+                <td><%= membre.presentation %></td>
+                <td><%= membre.mail %></td>  
+                <td><%= membre.telephone %></td>
+                <td><%= membre.date_recrutement %></td>
+                
+                
+                
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+
+    <!-- inclure le fichier navbar.ejs pour avoir la barre de navigation -->
+    <%- include('navbar') -%>
+
+    <h2>Mon équipe MayGourmet</h2>
+    <% resultatsEquipe.forEach((resultat)=>{ %>
+        <div class="card">
+            <img src="/image/image minions.jpg" alt="Avatar" style="width:40%">
+            <div class="container">
+                <h4>
+
+                </h4>
+
+            </div>
+
+            <h3><%= resultat.nom %></h3>
+            
+        </div>
+    <% }); %>
 </body>
 </html>
