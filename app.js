@@ -73,8 +73,21 @@ app.get('/api/equipe', (req, res) => {
 
 // j'ajoute un fournisseur dans la table fournisseur. pour cela, j'utilise la méthode POST,
 app.post('api/fournisseur', (req,res) => {
-    console.log("corp de la requete :", req.body);
+    console.log("corp de la requete : ", req.body);
+    const nomFournisseur = req.body.nomFournisseur;
+    const responsableFournisseur = req.body.responsable;
+    const mailFournisseur = req.body.emailFournisseur;
+    const telephoneFournisseur = req.body.telephoneFournisseur;
+    const adressePostaleFournisseur = req.body.adresseFournisseur;
+    const presentationFournisseur = req.body.presentationFournisseur;
+
+   "INSERT INTO fournisseur (nom, responsable, mail, telephone, adresse_postale, presentation_fournisseur )
+   "VALUES( ?,?,?,?,?,?)";
+
+   const ordreChamps = [nomFournisseur,];
+
 });
+
 
 app.get('/api/fournisseur', (req,res) => {
     res.render("fournisseur");
