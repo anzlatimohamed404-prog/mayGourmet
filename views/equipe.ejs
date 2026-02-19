@@ -9,77 +9,17 @@
 
 </head>
 <body>
-
-    <h1 style="text-align:center;">Liste de l'équipe</h1>
-
-<style>
-table {
-    border-collapse: collapse;
-    width: 70%;
-    margin: 20px auto;
-}
-
-th, td {
-    border: 1px solid black;
-    padding: 10px;
-    text-align: center;
-}
-
-th {
-    background-color: #dee1d2; /* couleur en-tête */
-}
-
-td {
-    background-color: #efe8e8; /* couleur intérieur tableau */
-}
-
-body {
-    background-color: rgb(216, 234, 243);
-}
-</style>
+    
 
 
-
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Poste</th>
-            <th>prenom</th>
-            <th>presentation</th>
-            <th>telephone</th>
-             <th>date_recrutement </th>
-            <th>mail</th>
-        </tr>
-    </thead>
-    <tbody>
-        
-        <% resultatsEquipe.forEach(function(membre){ %>
-            <tr>
-                <td><%= membre.id %></td>
-                <td><%= membre.nom %></td>
-                <td><%= membre.poste %></td>
-                <td><%= membre.prenom %></td>
-                <td><%= membre.presentation %></td>
-                <td><%= membre.telephone %></td>
-                <td><%= membre.date_recrutement %></td>
-                <td><%= membre.mail %></td>  
-                
-                
-                
-                
-            </tr>
-        <% }); %>
-    </tbody>
-</table>
+        <!-- Tableau des fournisseurs -->
 
 
     <!-- inclure le fichier navbar.ejs pour avoir la barre de navigation -->
     <%- include('navbar') -%>
 
     <h2>Mon équipe MayGourmet</h2>
-    <% resultatsEquipe.forEach((resultat)=>{ %>
+    <% resultatEquipe.forEach((resultat)=>{ %>
         <div class="card">
             <img src="/image/image minions.jpg" alt="Avatar" style="width:10%">
             <div class="container">

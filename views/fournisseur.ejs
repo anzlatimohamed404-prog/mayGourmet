@@ -1,40 +1,49 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fournisseur</title>
 </head>
 <body>
-       <!-- Inclure le fichier navbar.ejs pour avoir la barre de navigation -->
-     <%- include('navbar') -%>
+    
+<div class="container">
+  <form action="/api/fournisseur" method="post">
 
-     <div class="contener">
-        <form action="/api/fournisseur" method="post">
-            <label for="nomFournisseur">Nom</label>
-            <input type="text" id="nomFournisseur" name="nomFournisseur" placeholder="Nom du fournisseur ">
+    <label for="fname">Nom :</label>
+    <input type="text" id="nomFournisseur" name="nomFournisseur" placeholder="Nom du chef">
 
-            <label for="reponsableFournisseur">post</label>
-            <input type="email" id="reponsableFournisseur" name="reponsableFournisseur" placeholder="Nom du fournisseur ">
+    <label for="posteFournisseur">Poste :</label>
+    <input type="text" id="posteFournisseur" name="posteFournisseur" placeholder="Poste du fournisseur">
 
-            <label for="telephoneFournisseur">prenom</label>
-            <input type="text" id="telephoneFournisseur" name="telephoneFournisseur" placeholder="Numéro du fournisseur  ">
+    <label for="emailFournisseur">Mail :</label>
+    <input type="email" id="emailFournisseur" name="emailFournisseur" placeholder="Mail du fournisseur">
 
-            <label for="telephoneFournisseur">telephone</label>
-            <input type="text" id="telephoneFournisseur" name="telephoneFournisseur" placeholder="Numéro du fournisseur  ">
+    
+    <label for="telephoneFournisseur">Telephone :</label>
+    <input type="telephone" id="telephoneFournisseur" name="telephoneFournisseur" placeholder="Telephone du fournisseur">
 
-            <label for="telephoneFournisseur">date_recrutement</label>
-            <input type="text" id="telephoneFournisseur" name="telephoneFournisseur" placeholder="Numéro du fournisseur  ">
+    <label for="villeFournisseur">Ville :</label>
+    <input type="ville" id="villeFournisseur" name="villeFournisseur" placeholder="Ville du fournisseur">
 
-            <label for="telephoneFournisseur">mail</label>
-            <input type="text" id="telephoneFournisseur" name="telephoneFournisseur" placeholder="Numéro du fournisseur  ">
+    
+    <label for="adressePostaleFournisseur">Adresse postale :</label>
+    <input type="adressePostaleFournisseur " id="adressePostaleFournisseur" name="adressePostaleFournisseur" placeholder="Adresse Postale Fournisseur du fournisseur">
 
-            <label for="telephoneFournisseur">presentation</label>
-            <textarea  id="presentationFournisseur" name="presentationFournisseur" 
-            placeholder="Dites-nous plus sur le Fournisseur " style="height: 200px;"></textarea>
+    <label for="dateFournisseur">Date de recrutement:</label>
+    <input type="date de recrutement" id="dateFournisseur" name="dateFournisseur" placeholder="date de recrutement du fournisseur">
 
-            <button type="submit">Enregistrer</button>
-        </form>
-     </div>
+    <label for="presentationFournisseur">Présentation :</label>
+    <textarea id="presentationFournisseur" name="presentationFournisseur" placeholder="Dites-nous plus sur le fournisseur" style="height:200px"></textarea>
+
+    
+    <input type="submit" value="Enregistrer">
+
+  </form>
+</div>
+
 </body>
 </html>
+
+
+
