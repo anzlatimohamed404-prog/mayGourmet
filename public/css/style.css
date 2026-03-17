@@ -1,33 +1,54 @@
 body {
-    background-color: lightpink;
+    background-color:rgb(214, 189, 211);
+
+
+        table {
+        border: 1px solid black;
+        width: 15px;
+        margin: 15px auto;
+        padding: 10px;
+        background-color: white;
+        border-radius: 8px;
+        };
+       
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+            background-color: rgb(207, 172, 172);
+            margin: 15px auto;
+        };
+
+
+        th {
+            background-color: rgb(233, 198, 209);
+        };
+       
+       
 };
 
 
-
-body {
-    background-color: rgb(195, 213, 222);
-
-    
-table {
-    border-collapse: collapse;
-    width: 70%;
-    margin: 20px auto;
-}
-
-th, td {
-    border: 1px solid black;
-    padding: 10px;
+ 
+h2 {
     text-align: center;
+    color: white;
+};
+
+
+.card {
+  /* Ombre effet carte */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
 }
 
-th {
-    background-color: #dee1d2; /* couleur en-tête */
+
+/* Effet au survol */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-td {
-    background-color: #efe8e8; /* couleur intérieur tableau */
 
-
-    
-}
+/* Padding interne */
+.container {
+  padding: 2px 16px;
 }

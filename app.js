@@ -90,61 +90,50 @@ app.get("/api/equipe", (req, res) => {
 app.post('/api/fournisseur', (req, res) => {
     console.log("corps de la requête : ", req.body);
 
-    console.log(req.body.nom);
-    const nomFournisseur = req.body.nom;
+    const nomFournisseur = req.body.nomFournisseur;
+    const posteFournisseur = req.body.posteFournisseur;
+    const emailFournisseur = req.body.emailFournisseur;
+    const telephoneFournisseur = req.body.telephoneFournisseur;
+    const adresseFournisseur = req.body.adressePostaleFournisseur;
+    const PresentationFournisseur = req.body.presentationFournisseur;
 
-    console.log(req.body.responsable);
-    const posteFournisseur= req.body.poste;
+    const requeteSql = "INSERT INTO fournisseur (nom, responsable, mail, telephone, adresse_postale, presentation_fournisseur) VALUES (?, ?, ?, ?, ?, ?)";
 
-    console.log(req.body.email);
-    const emailFournisseur = req.body.email;
-
-    console.log(req.body.telephone);
-    const telephoneFournisseur = req.body.telephone;
-
-    console.log(req.body.adresse_postale);
-    const adresseFournisseur = req.body.adresse_postale;
-
-    console.log(req.body.Presentation);
-    const PresentationFournisseur = req.body.Presentation;
-
-    
-    console.log(req.body.Presentation);
-    const villeFournisseur = req.body.ville;
-
-    
-    console.log(req.body.Presentation);
-    const dateFournisseur = req.body.date_recrutement;
-
-
-    const requeteSql = "INSERT INTO fournisseur (nom, responsable, email, telephone, adresse_postale, Presentation_fournisseur) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-    const ordreChamps = [nomFournisseur, dateFournisseur, posteFournisseur, emailFournisseur, villeFournisseur, telephoneFournisseur, adresseFournisseur, PresentationFournisseur]; 
+    const ordreChamps = [nomFournisseur, posteFournisseur, emailFournisseur, telephoneFournisseur, adresseFournisseur, PresentationFournisseur];
 
     // Je me connecte à la base de données
     req.getConnection((erreur, connection) => {
         if(erreur) {
-            console.log("Erreur de connxion à la base de données : ", erreur);
-
+            console.log("Erreur de connexion à la base de données : ", erreur);
         } else{ // Si j'ai réussi à me connecter à la base de données
             connection.query(requeteSql, ordreChamps, (erreur,nouveauFournisseur) => {
                 if(erreur) {
                     console.log("Erreur d'ajout fournisseur :", erreur);
                 } else{
-                    console.log("Bravo! Nouveau fournisseur ajoute");
-                    res.status(200).redirect("/api/accueil");
+                    console.log("Bravo! Nouveau fournisseur ajouté");
+                    res.status(200).redirect("/api/fournisseur");
                 }
-
             });
         }
     });
-    
-
 });
 
 
 app.get('/api/fournisseur', (req, res) => {
-    res.render('fournisseur');
+    req.getConnection((erreur, connection) => {
+        if(erreur){
+            console.log(erreur);
+        } else{
+            connection.query("SELECT * FROM fournisseur", [], (err,resultatFournisseur) => {
+                if (erreur) {
+                    console.log("Erreur dans la requête Sql SELECT");
+                } else{
+                    console.log("Fournisseurs:", resultatFournisseur);
+                    res.render("fournisseur", {resultatFournisseur});
+                }
+            });
+        }
+    });
 });
 
 // API route pour supprimer un membre de l'equipe 
@@ -170,6 +159,17 @@ app.delete('/api/equipe/:id', (req, res) => {
     });
 
 });
+
+app.get("/api/plats", (req, res) => {
+    console.log("Je passe dans /api/plats");
+    res.render("plats");
+});
+
+app.get("/api/contact", (req, res) => {
+    console.log("Je passe dans /api/contact");
+    res.render("contact");
+});
+
 
 
 //fin du fichier. Donc ne pas coder en dessous de celui-ci

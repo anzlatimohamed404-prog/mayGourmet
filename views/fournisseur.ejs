@@ -1,47 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fournisseur</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <%- include('navbar'); %>
     
-<div class="container">
-  <form action="/api/fournisseur" method="post">
+    <div class="container">
+        <h1>Fournisseurs</h1>
+        
+        <% if (resultatFournisseur && resultatFournisseur.length > 0) { %>
+            <div class="cards-container">
+                <% resultatFournisseur.forEach(fournisseur => { %>
+                    <div class="card">
+                        <h3><%= fournisseur.nom %></h3>
+                        <p><strong>Responsable:</strong> <%= fournisseur.responsable %></p>
+                        <p><strong>Email:</strong> <%= fournisseur.mail %></p>
+                        <p><strong>Téléphone:</strong> <%= fournisseur.telephone %></p>
+                        <p><strong>Adresse:</strong> <%= fournisseur.adresse_postale %></p>
+                        <p><strong>Présentation:</strong> <%= fournisseur.presentation_fournisseur %></p>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <p>Aucun fournisseur trouvé.</p>
+        <% } %>
+        
+        <h2>Ajouter un Fournisseur</h2>
+        <form action="/api/fournisseur" method="post">
+            <label for="nomFournisseur">Nom :</label>
+            <input type="text" id="nomFournisseur" name="nomFournisseur" placeholder="Nom du fournisseur" required>
 
-    <label for="fname">Nom :</label>
-    <input type="text" id="nomFournisseur" name="nomFournisseur" placeholder="Nom du chef">
+            <label for="posteFournisseur">Responsable :</label>
+            <input type="text" id="posteFournisseur" name="posteFournisseur" placeholder="Responsable du fournisseur" required>
 
-    <label for="posteFournisseur">Poste :</label>
-    <input type="text" id="posteFournisseur" name="posteFournisseur" placeholder="Poste du fournisseur">
+            <label for="emailFournisseur">Email :</label>
+            <input type="email" id="emailFournisseur" name="emailFournisseur" placeholder="Email du fournisseur" required>
 
-    <label for="emailFournisseur">Mail :</label>
-    <input type="email" id="emailFournisseur" name="emailFournisseur" placeholder="Mail du fournisseur">
+            <label for="telephoneFournisseur">Téléphone :</label>
+            <input type="tel" id="telephoneFournisseur" name="telephoneFournisseur" placeholder="Téléphone du fournisseur">
 
-    
-    <label for="telephoneFournisseur">Telephone :</label>
-    <input type="telephone" id="telephoneFournisseur" name="telephoneFournisseur" placeholder="Telephone du fournisseur">
+            <label for="adressePostaleFournisseur">Adresse postale :</label>
+            <input type="text" id="adressePostaleFournisseur" name="adressePostaleFournisseur" placeholder="Adresse postale du fournisseur">
 
-    <label for="villeFournisseur">Ville :</label>
-    <input type="ville" id="villeFournisseur" name="villeFournisseur" placeholder="Ville du fournisseur">
+            <label for="presentationFournisseur">Présentation :</label>
+            <textarea id="presentationFournisseur" name="presentationFournisseur" placeholder="Présentation du fournisseur" style="height:200px"></textarea>
 
-    
-    <label for="adressePostaleFournisseur">Adresse postale :</label>
-    <input type="adressePostaleFournisseur " id="adressePostaleFournisseur" name="adressePostaleFournisseur" placeholder="Adresse Postale Fournisseur du fournisseur">
-
-    <label for="dateFournisseur">Date de recrutement:</label>
-    <input type="date de recrutement" id="dateFournisseur" name="dateFournisseur" placeholder="date de recrutement du fournisseur">
-
-    <label for="presentationFournisseur">Présentation :</label>
-    <textarea id="presentationFournisseur" name="presentationFournisseur" placeholder="Dites-nous plus sur le fournisseur" style="height:200px"></textarea>
-
-    
-    <input type="submit" value="Enregistrer">
-
-  </form>
-</div>
-
+            <input type="submit" value="Enregistrer">
+        </form>
+    </div>
 </body>
 </html>
 

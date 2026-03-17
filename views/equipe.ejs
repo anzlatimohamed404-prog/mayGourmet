@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notre équipe</title>
+    <link rel="stylesheet" href="/css//style.css">
 
     
 
@@ -13,6 +14,42 @@
 
 
         <!-- Tableau des fournisseurs -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Poste</th>
+                <th>Mail</th>
+                <th>Téléphone</th>
+                <th>Ville</th>
+                <th>Adresse postale</th>
+                <th>Date de recrutement</th>
+                <th>Présentation</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+        <% resultatEquipe.forEach(function(membre){ %>
+           
+            <tr>
+                <td><%= membre.id %></td>
+                <td><%= membre.nom %></td>
+                <td><%= membre.poste %></td>
+                <td><%= membre.mail %></td>
+                <td><%= membre.telephone %></td>
+                <td><%= membre.ville %></td>
+                <td><%= membre.adresse_postale %></td>
+                <td><%= membre.date_recrutement %></td>
+                <td><%= membre.presentation %></td>
+               
+               
+               
+            </tr>
+        <% }); %>
+        </tbody>
+</table>
 
 
     <!-- inclure le fichier navbar.ejs pour avoir la barre de navigation -->
