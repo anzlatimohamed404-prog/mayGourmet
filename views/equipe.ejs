@@ -67,8 +67,12 @@
             </div>
 
             <h3><%= resultat.nom %></h3>
+            <p><%= resultat.post %></p>
+            <input type="button" value="supprimer" onclick="supprimer('<%= resultat.id %>')">
             
         </div>
     <% }); %>
-</body>
+
+    </body>
+<script src="script.js"></script>
 </html>
