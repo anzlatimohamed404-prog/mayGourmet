@@ -86,6 +86,37 @@ app.get("/api/equipe", (req, res) => {
    
 });
 
+// J'ajoute un membre dans la table equipe (modal form)
+app.post('/api/equipe', (req, res) => {
+    const nom = req.body.nom;
+    const prenom = req.body.prenom;
+    const mail = req.body.mail;
+    const telephone = req.body.telephone;
+    const post = req.body.post;
+    const adresse_postale = req.body.adresse_postale;
+    const presentation = req.body.presentation;
+
+    const requeteSql = "INSERT INTO equipe (nom, prenom, mail, telephone, post, adresse_postale, presentation) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    const ordreChamps = [nom, prenom, mail, telephone, post, adresse_postale, presentation];
+
+    req.getConnection((erreur, connection) => {
+        if (erreur) {
+            console.log("Erreur de connexion à la base de données :", erreur);
+            return res.status(500).send("Erreur serveur");
+        }
+
+        connection.query(requeteSql, ordreChamps, (erreur) => {
+            if (erreur) {
+                console.log("Erreur d'ajout membre :", erreur);
+                return res.status(500).send("Erreur lors de l'ajout du membre");
+            }
+
+            res.redirect('/api/equipe');
+        });
+    });
+});
+
 // J'ajoute un fournisseur dans la table fournisseur pour cela j'utilise la méthode POST
 app.post('/api/fournisseur', (req, res) => {
     console.log("corps de la requête : ", req.body);

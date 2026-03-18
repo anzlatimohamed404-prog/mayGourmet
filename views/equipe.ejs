@@ -4,75 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notre équipe</title>
-    <link rel="stylesheet" href="/css//style.css">
-
-    
-
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    
+    <%- include('navbar'); %>
 
+    <!-- Bouton pour ouvrir le modal -->
+    <button id="myBtn">Ouvrir la fenêtre</button>
 
-        <!-- Tableau des fournisseurs -->
+    <!-- Le Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Contenu de la modal -->
+        <div class="modal-content">
+
+            <!-- Header -->
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Ajouter un membre</h2>
+            </div>
+
+            <!-- Body : messages + formulaire -->
+            <div class="modal-body">
+
+                <!-- Messages en haut -->
+                <div class="modal-messages">
+                    <p>Je suis body</p>
+                    <p>Formulaire d'inscription</p>
+                </div>
+
+                <!-- Formulaire -->
+                <form id="formMembre" action="/api/equipe" method="post">
+                    <label for="nom">Nom :</label>
+                    <input type="text" id="nom" name="nom" required>
+
+                    <label for="prenom">Prénom :</label>
+                    <input type="text" id="prenom" name="prenom" required>
+
+                    <label for="mail">Email :</label>
+                    <input type="email" id="mail" name="mail" required>
+
+                    <label for="telephone">Téléphone :</label>
+                    <input type="tel" id="telephone" name="telephone">
+
+                    <label for="post">Poste :</label>
+                    <input type="text" id="post" name="post" required>
+
+                    <label for="adresse_postale">Adresse postale :</label>
+                    <input type="text" id="adresse_postale" name="adresse_postale">
+
+                    <label for="presentation">Présentation :</label>
+                    <textarea id="presentation" name="presentation" style="height:100px;"></textarea>
+
+                    <button type="submit">Enregistrer les informations</button>
+                </form>
+
+            </div>
+
+            <!-- Footer : boutons -->
+            <div class="modal-footer">
+                <button type="submit" form="formMembre">Enregistrer les informations</button>
+                <button type="button" class="close">Annuler</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Tableau de l'équipe -->
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nom</th>
                 <th>Poste</th>
-                <th>Mail</th>
+                <th>Email</th>
                 <th>Téléphone</th>
-                <th>Ville</th>
                 <th>Adresse postale</th>
                 <th>Date de recrutement</th>
                 <th>Présentation</th>
             </tr>
         </thead>
         <tbody>
-
-
-        <% resultatEquipe.forEach(function(membre){ %>
-           
-            <tr>
-                <td><%= membre.id %></td>
-                <td><%= membre.nom %></td>
-                <td><%= membre.poste %></td>
-                <td><%= membre.mail %></td>
-                <td><%= membre.telephone %></td>
-                <td><%= membre.ville %></td>
-                <td><%= membre.adresse_postale %></td>
-                <td><%= membre.date_recrutement %></td>
-                <td><%= membre.presentation %></td>
-               
-               
-               
-            </tr>
-        <% }); %>
+            <% resultatEquipe.forEach(function(membre){ %>
+                <tr>
+                    <td><%= membre.id %></td>
+                    <td><%= membre.nom %></td>
+                    <td><%= membre.post %></td>
+                    <td><%= membre.mail %></td>
+                    <td><%= membre.telephone %></td>
+                    <td><%= membre.adresse_postale %></td>
+                    <td><%= membre.date_recrutement %></td>
+                    <td><%= membre.presentation %></td>
+                </tr>
+            <% }); %>
         </tbody>
-</table>
+    </table>
 
-
-    <!-- inclure le fichier navbar.ejs pour avoir la barre de navigation -->
-    <%- include('navbar') -%>
-
+    <!-- Cartes des membres -->
     <h2>Mon équipe MayGourmet</h2>
-    <% resultatEquipe.forEach((resultat)=>{ %>
+    <% resultatEquipe.forEach((membre) => { %>
         <div class="card">
-            <img src="/image/image minions.jpg" alt="Avatar" style="width:10%">
-            <div class="container">
-                <h4>
-
-                </h4>
-
+            <img src="/image/image minions.jpg" alt="Avatar">
+            <div>
+                <h3><%= membre.nom %> <%= membre.prenom %></h3>
+                <p><strong>Poste :</strong> <%= membre.post %></p>
+                <p><strong>Email :</strong> <%= membre.mail %></p>
+                <p><strong>Téléphone :</strong> <%= membre.telephone %></p>
+                <input type="button" value="Supprimer" onclick="supprimer('<%= membre.id %>')">
             </div>
-
-            <h3><%= resultat.nom %></h3>
-            <p><%= resultat.post %></p>
-            <input type="button" value="supprimer" onclick="supprimer('<%= resultat.id %>')">
-            
         </div>
     <% }); %>
 
-    </body>
-<script src="script.js"></script>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get all close buttons (can be multiple)
+        var closeButtons = document.getElementsByClassName("close");
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on any close button, close the modal
+        for (var i = 0; i < closeButtons.length; i++) {
+            closeButtons[i].onclick = function() {
+                modal.style.display = "none";
+            }
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <script src="/script.js"></script>
+</body>
 </html>

@@ -1,14 +1,10 @@
+function supprimer(id) {
+    const routeComplete = '/api/equipe/' + id;
 
-        function supprimer(id) {
-            const routeComplete = '/api/equipe/'+ id;
-
-            fetch(
-                routeComplete, {method: "DELETE"}
-            ).then(
-                (reponse) => response.json()
-        ).then(
-                (donne) => window.location.href = donnee.routeAccueil
-            ).catch(
-                (erreur) => console.log(erreur)
-            )
-        }
+    fetch(routeComplete, { method: "DELETE" })
+        .then(() => {
+            // Après suppression, on recharge la page pour afficher la liste à jour
+            window.location.reload();
+        })
+        .catch((erreur) => console.error('Erreur suppression :', erreur));
+}
