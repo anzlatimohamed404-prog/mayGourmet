@@ -488,8 +488,15 @@ input[type="submit"]:hover {
 }
 
 /* Page Accueil */
-body.accueil-page {
+.accueil-page {
     background: linear-gradient(135deg, #d6bdd3 0%, #f5e6f0 50%, #e8d4e8 100%);
+   background-image: url(/image/couverture.png)
+        linear-gradient(135deg, #d6bdd3 0%, #f5e6f0 50%, #e8d4e8 100%),
+        url(/image/chefanzlati.png);
+    background-repeat: no-repeat;
+    background-size: auto, contain;
+    background-position: center, right center;
+    background-attachment: fixed;
     min-height: 100vh;
 }
 
@@ -525,4 +532,7 @@ body.accueil-page {
   border-radius: 15px;               /* coins arrondis */
   padding: 20px;                     /* espace intérieur */
 }
+
+
+
 
