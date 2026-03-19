@@ -9,9 +9,70 @@
 
 <%- include('navbar') %>
 
-<h1>Contact 📞</h1>
-<p>Email : contact@maygourmet.com</p>
-<p>Téléphone : 06 39 16 17 18</p>
+<div class="container contact-container">
+    <section class="contact-section">
+        <h1>Contact 📞</h1>
+        <p>Besoin d'aide ? Envoie-nous un message et nous te répondrons rapidement.</p>
+
+        <% if (success) { %>
+            <div class="message-success">
+                ✅ Merci ! Votre message a bien été envoyé.
+            </div>
+        <% } %>
+
+        <div class="contact-card">
+            <h2>Nous contacter</h2>
+            <p><strong>Email :</strong> <a href="mailto:contact@maygourmet.com">contact@maygourmet.com</a></p>
+            <p><strong>Téléphone :</strong> <a href="tel:+33639161718">06 39 16 17 18</a></p>
+            <p><strong>Adresse :</strong> 123 Rue de la Cuisine, combani</p>
+        </div>
+
+        <!-- Bouton pour afficher/masquer le formulaire -->
+        <div class="contact-header">
+            <button id="toggleFormBtn" class="toggle-btn">✉️ Envoyer un Message</button>
+        </div>
+
+        <!-- Formulaire caché -->
+        <div id="contactForm" class="contact-form-section hidden">
+            <div class="contact-card">
+                <h2>Envoyer un message</h2>
+                <form action="/api/contact" method="post" class="contact-form">
+                    <label for="nom">Nom :</label>
+                    <input type="text" id="nom" name="nom" required>
+
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message :</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+        </div>  <!-- Fin du contact-form-section -->
+    </section>
+</div>
+
+<!-- Script pour afficher/masquer le formulaire de contact -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleFormBtn = document.getElementById('toggleFormBtn');
+        const contactForm = document.getElementById('contactForm');
+
+        if (toggleFormBtn && contactForm) {
+            toggleFormBtn.onclick = function() {
+                contactForm.classList.toggle('hidden');
+                
+                // Changer le texte du bouton
+                if (contactForm.classList.contains('hidden')) {
+                    toggleFormBtn.textContent = '✉️ Envoyer un Message';
+                } else {
+                    toggleFormBtn.textContent = '✉️ Masquer le Formulaire';
+                }
+            };
+        }
+    });
+</script>
 
 </body>
 </html>

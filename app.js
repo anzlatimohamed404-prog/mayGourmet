@@ -1,7 +1,8 @@
-// j'importe le framewordk Expressjs.
+// Application Express / API de gestion MayGourmet
+// j'importe le framework Express.js pour gérer les routes et les réponses HTTP.
 const express = require('express');
 
-// J'importe le pilote Mysql2 utilisé interroger la BDD Mysql
+// J'importe le pilote Mysql2 utilisé pour interroger la base de données MySQL
 const mysql2 = require("mysql2");
 
 // J'importe le pilote express-myconnection utilisé pour me connecter à la BDD
@@ -10,6 +11,7 @@ const connection = require('express-myconnection');
 
 const app = express();
 
+// Middleware pour parser le corps des requêtes en JSON et en données de formulaire
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -195,12 +197,52 @@ app.delete('/api/equipe/:id', (req, res) => {
 
 app.get("/api/plats", (req, res) => {
     console.log("Je passe dans /api/plats");
-    res.render("plats");
+    res.render("plats", { success: req.query.success });
 });
 
 app.get("/api/contact", (req, res) => {
     console.log("Je passe dans /api/contact");
-    res.render("contact");
+    res.render("contact", { success: req.query.success });
+});
+
+// Traitement du formulaire de contact (simple, sans base de données)
+app.post("/api/contact", (req, res) => {
+    const nom = req.body.nom;
+    const email = req.body.email;
+    const message = req.body.message;
+
+    console.log("Message de contact reçu :", { nom, email, message });
+
+    // Redirection vers la page de contact avec un indicateur de succès
+    res.redirect('/api/contact?success=true');
+});
+
+// API route pour ajouter une commande
+app.post('/api/commande', (req, res) => {
+    const nomPlat = req.body.nomPlat;
+    const categorie = req.body.categorie;
+    const prix = req.body.prix;
+    const quantite = req.body.quantite;
+
+    const requeteSql = "INSERT INTO commandes (nomPlat, categorie, prix, quantite, date_commande) VALUES (?, ?, ?, ?, NOW())";
+    const ordreChamps = [nomPlat, categorie, prix, quantite];
+
+    req.getConnection((erreur, connection) => {
+        if (erreur) {
+            console.log("Erreur de connexion à la base de données :", erreur);
+            return res.status(500).send("Erreur serveur");
+        }
+
+        connection.query(requeteSql, ordreChamps, (erreur) => {
+            if (erreur) {
+                console.log("Erreur d'ajout commande :", erreur);
+                return res.status(500).send("Erreur lors de la commande");
+            }
+
+            console.log("Commande enregistrée : ", nomPlat, " x", quantite);
+            res.redirect('/api/plats?success=true');
+        });
+    });
 });
 
 

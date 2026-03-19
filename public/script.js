@@ -1,3 +1,4 @@
+// Fonction client pour supprimer un membre de l'équipe via l'API
 function supprimer(id) {
     const routeComplete = '/api/equipe/' + id;
 

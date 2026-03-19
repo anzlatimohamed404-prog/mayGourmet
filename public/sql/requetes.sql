@@ -97,3 +97,21 @@ WHERE id = 1;
 
 DELETE FROM plat
 WHERE id = 5;
+
+CREATE TABLE commandes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nomPlat VARCHAR(100) NOT NULL,
+    categorie VARCHAR(50) NOT NULL,
+    prix DECIMAL(8,2) NOT NULL,
+    quantite INT NOT NULL,
+    date_commande DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+SHOW TABLES;
+
+INSERT INTO commandes (nomPlat, categorie, prix, quantite) VALUES
+('Salade de papaye', 'Entrée', 12.00, 2),
+('Poulet coco', 'Plat principal', 18.00, 1),
+('Mousse au chocolat', 'Dessert', 6.00, 3);
+
+SELECT * FROM commandes;

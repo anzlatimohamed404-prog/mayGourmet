@@ -9,53 +9,177 @@
 
 <%- include('navbar') %>
 
+<!-- Page de menu : affichage des plats et prise de commande à distance -->
 <div class="container">
     <h1>Nos Plats 🍽️</h1>
-    <p><strong>Voici les plats de MayGourmet</strong></p>
+    <p><strong>Voici les plats de MayGourmet - Passez votre commande !</strong></p>
 
-    <h2>Menu</h2>
-    <table class="table-plats">
-        <thead>
-            <tr>
-                <th>Entrées</th>
-                <th>Plats</th>
-                <th>Desserts</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Salade de papaye</td>
-                <td>Poulet coco</td>
-                <td>Flan à la vanille</td>
-            </tr>
-            <tr>
-                <td>Samoussas</td>
-                <td>Poisson grillé</td>
-                <td>Gâteau à la banane</td>
-            </tr>
-            <tr>
-                <td>Soupe de légumes</td>
-                <td>Boeuf bourguignon</td>
-                <td>Crème brûlée</td>
-            </tr>
-            <tr>
-                <td>Bruschetta</td>
-                <td>Filet de saumon</td>
-                <td>Tarte aux pommes</td>
-            </tr>
-            <tr>
-                <td>Salade niçoise</td>
-                <td>Ratatouille</td>
-                <td>Mousse au chocolat</td>
-            </tr>
-            <tr>
-                <td>Quiche lorraine</td>
-                <td>Curry de légumes</td>
-                <td>Panna cotta</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <% if (success) { %>
+        <div class="message-success">
+            ✓ Votre commande a été enregistrée avec succès ! Merci de votre confiance.
+        </div>
+    <% } %>
+
+    <!-- Bouton pour afficher/masquer les plats -->
+    <div class="plats-header">
+        <button id="togglePlatsBtn" class="toggle-btn">📊 Voir le Menu Complet</button>
+    </div>
+
+    <!-- Section cachée des plats -->
+    <div id="platsMenu" class="plats-menu hidden">
+        <h2>Nos Entrées</h2>
+        <div class="menu-grid">
+        <div class="plat-card">
+            <img src="/image/salade de papaye.jpg" alt="Salade de papaye" class="plat-image">
+            <h3>Salade de papaye</h3>
+            <p class="prix">12€</p>
+            <form action="/api/commande" method="post" class="form-commande">
+                <input type="hidden" name="nomPlat" value="Salade de papaye">
+                <input type="hidden" name="categorie" value="Entrée">
+                <input type="hidden" name="prix" value="12">
+                <label for="quantite1">Quantité :</label>
+                <input type="number" id="quantite1" name="quantite" min="1" value="1" required>
+                <button type="submit">valider la commande</button>
+            </form>
+        </div>
+
+        <div class="plat-card">
+            <img src="/image/Samoussas.jpg" alt="Samoussas" class="plat-image">
+            <h3>Samoussas</h3>
+            <p class="prix">8€</p>
+            <form action="/api/commande" method="post" class="form-commande">
+                <input type="hidden" name="nomPlat" value="Samoussas">
+                <input type="hidden" name="categorie" value="Entrée">
+                <input type="hidden" name="prix" value="8">
+                <label for="quantite2">Quantité :</label>
+                <input type="number" id="quantite2" name="quantite" min="1" value="1" required>
+                <button type="submit">valider la commande</button>
+            </form>
+        </div>
+
+        <div class="plat-card">
+            <img src="/image/soupe de legumes.jpg" alt="Soupe de légumes" class="plat-image">
+            <h3>Soupe de légumes</h3>
+            <p class="prix">9€</p>
+            <form action="/api/commande" method="post" class="form-commande">
+                <input type="hidden" name="nomPlat" value="Soupe de légumes">
+                <input type="hidden" name="categorie" value="Entrée">
+                <input type="hidden" name="prix" value="9">
+                <label for="quantite3">Quantité :</label>
+                <input type="number" id="quantite3" name="quantite" min="1" value="1" required>
+                <button type="submit">valider la commande</button>
+            </form>
+        </div>
+    </div>
+
+    <h2>Nos Plats principaux</h2>
+    <div class="menu-grid">
+        <div class="plat-card">
+            <img src="/image/Poulet coco.webp" alt="Poulet coco" class="plat-image">
+            <h3>Poulet coco</h3>
+            <p class="prix">18€</p>
+            <form action="/api/commande" method="post" class="form-commande">
+                <input type="hidden" name="nomPlat" value="Poulet coco">
+                <input type="hidden" name="categorie" value="Plat principal">
+                <input type="hidden" name="prix" value="18">
+                <label for="quantite4">Quantité :</label>
+                <input type="number" id="quantite4" name="quantite" min="1" value="1" required>
+                <button type="submit">valider la commande</button>
+            </form>
+        </div>
+
+        <div class="plat-card">
+            <img src="/image/Poisson grillé.jpg" alt="Poisson grillé" class="plat-image">
+            <h3>Poisson grillé</h3>
+            <p class="prix">20€</p>
+            <form action="/api/commande" method="post" class="form-commande">
+                <input type="hidden" name="nomPlat" value="Poisson grillé">
+                <input type="hidden" name="categorie" value="Plat principal">
+                <input type="hidden" name="prix" value="20">
+                <label for="quantite5">Quantité :</label>
+                <input type="number" id="quantite5" name="quantite" min="1" value="1" required>
+                <button type="submit">valider la commande</button>
+            </form>
+        </div>
+
+        <div class="plat-card">
+            <img src="/image/Boeuf bourguignon.webp" alt="Boeuf bourguignon" class="plat-image">
+            <h3>Boeuf bourguignon</h3>
+            <p class="prix">22€</p>
+            <form action="/api/commande" method="post" class="form-commande">
+                <input type="hidden" name="nomPlat" value="Boeuf bourguignon">
+                <input type="hidden" name="categorie" value="Plat principal">
+                <input type="hidden" name="prix" value="22">
+                <label for="quantite6">Quantité :</label>
+                <input type="number" id="quantite6" name="quantite" min="1" value="1" required>
+                <button type="submit">valider la commande</button>
+            </form>
+        </div>
+    </div>
+
+    <h2>Nos Desserts</h2>
+    <div class="menu-grid">
+        <div class="plat-card">
+            <img src="/image/Flan à la vanille.jpg" alt="Flan à la vanille" class="plat-image">
+            <h3>Flan à la vanille</h3>
+            <p class="prix">7€</p>
+            <form action="/api/commande" method="post" class="form-commande">
+                <input type="hidden" name="nomPlat" value="Flan à la vanille">
+                <input type="hidden" name="categorie" value="Dessert">
+                <input type="hidden" name="prix" value="7">
+                <label for="quantite7">Quantité :</label>
+                <input type="number" id="quantite7" name="quantite" min="1" value="1" required>
+                <button type="submit">valider la commande</button>
+            </form>
+        </div>
+
+        <div class="plat-card">
+            <img src="/image/Gâteau à la banane.jpg" alt="Gâteau à la banane" class="plat-image">
+            <h3>Gâteau à la banane</h3>
+            <p class="prix">8€</p>
+            <form action="/api/commande" method="post" class="form-commande">
+                <input type="hidden" name="nomPlat" value="Gâteau à la banane">
+                <input type="hidden" name="categorie" value="Dessert">
+                <input type="hidden" name="prix" value="8">
+                <label for="quantite8">Quantité :</label>
+                <input type="number" id="quantite8" name="quantite" min="1" value="1" required>
+                <button type="submit">valider la commande</button>
+            </form>
+        </div>
+
+        <div class="plat-card">
+            <img src="/image/Mousse au chocolat.webp" alt="Mousse au chocolat" class="plat-image">
+            <h3>Mousse au chocolat</h3>
+            <p class="prix">6€</p>
+            <form action="/api/commande" method="post" class="form-commande">
+                <input type="hidden" name="nomPlat" value="Mousse au chocolat">
+                <input type="hidden" name="categorie" value="Dessert">
+                <input type="hidden" name="prix" value="6">
+                <label for="quantite9">Quantité :</label>
+                <input type="number" id="quantite9" name="quantite" min="1" value="1" required>
+                <button type="submit">valider la commande</button>
+            </form>
+        </div>
+    </div>
+    </div>  <!-- Fin de plats-menu -->
+</div>  <!-- Fin du container -->
+
+<!-- Script pour afficher/masquer le menu -->
+<script>
+    const toggleBtn = document.getElementById('togglePlatsBtn');
+    const platsMenu = document.getElementById('platsMenu');
+
+    toggleBtn.onclick = function() {
+        platsMenu.classList.toggle('hidden');
+        
+        // Changer le texte du bouton
+        if (platsMenu.classList.contains('hidden')) {
+            toggleBtn.textContent = '📊 Voir le Menu Complet';
+        } else {
+            toggleBtn.textContent = '📊 Masquer le Menu';
+        }
+    };
+</script>
 
 </body>
 </html>
