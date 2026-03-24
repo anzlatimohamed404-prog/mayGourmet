@@ -490,9 +490,6 @@ input[type="submit"]:hover {
 /* Page Accueil */
 .accueil-page {
     background: linear-gradient(135deg, #d6bdd3 0%, #f5e6f0 50%, #e8d4e8 100%);
-   background-image: url(/image/couverture.png)
-        linear-gradient(135deg, #d6bdd3 0%, #f5e6f0 50%, #e8d4e8 100%),
-        url(/image/chefanzlati.png);
     background-repeat: no-repeat;
     background-size: auto, contain;
     background-position: center, right center;

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notre équipe</title>
     <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/modal.js" defer></script>
 </head>
 <body>
     <%- include('navbar'); %>
@@ -47,7 +48,7 @@
                     <label for="telephone">Téléphone :</label>
                     <input type="tel" id="telephone" name="telephone">
 
-                    <label for="post">Poste :</label>
+                    <label for="post">Post :</label>
                     <input type="text" id="post" name="post" required>
 
                     <label for="adresse_postale">Adresse postale :</label>
@@ -110,36 +111,17 @@
                 <p><strong>Poste :</strong> <%= membre.post %></p>
                 <p><strong>Email :</strong> <%= membre.mail %></p>
                 <p><strong>Téléphone :</strong> <%= membre.telephone %></p>
+                <div class="actions">
                 <input type="button" value="Supprimer" onclick="supprimer('<%= membre.id %>')">
+                <input type="button" value="Modifier" onclick="modifier('<%= membre.id %>', '<%= membre.nom %>', '<%= membre.prenom %>', '<%= membre.mail %>', '<%= membre.telephone %>', '<%= membre.post %>', '<%= membre.adresse_postale %>', '<%= membre.presentation %>','<%= membre.date_recrutement %>' )">
+                <input type="button" value="Enregistrer" onclick="enregistrer('<%= membre.id %>')" style="display:none;" id="save-<%= membre.id %>">
+                </div>
+                
             </div>
         </div>
     <% }); %>
 
-    <script>
-       
-        var modal = document.getElementById("myModal");
-
-        var btn = document.getElementById("myBtn");
-
-        var closeButtons = document.getElementsByClassName("close");
-
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        
-        for (var i = 0; i < closeButtons.length; i++) {
-            closeButtons[i].onclick = function() {
-                modal.style.display = "none";
-            }
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+    
 
     <script src="/script.js"></script>
 </body>
